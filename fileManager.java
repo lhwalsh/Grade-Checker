@@ -9,6 +9,13 @@ public class fileManager {
 	
 	String[] files = new String[10];
 
+	// purpose of this code is to create access a file, or create a new one
+	// if we don't already have a file with that name
+	
+	// most of this code I copied from stackoverflow
+
+	// there is an error in the code somewhere here, need to go through
+	// and understand it then find the bug
 	public fileManager(String fileName) throws Exception {
 		final File folder = new File("~/randomProjects/gradeChecker/courses");
 		listFilesForFolder(folder);
@@ -29,6 +36,10 @@ public class fileManager {
 			if (fileEntry.isDirectory()) {
 				listFilesForFolder(fileEntry);
 			} else {
+			    // this code isn't what I want
+			    // not sure what I'll want to put here but it will most likely
+			    // be pulling a text file and reading through it to find the 
+			    // data for the class
 				System.out.println(fileEntry.getName());
 				files[counter] = fileEntry.getName();
 				counter++;
