@@ -25,12 +25,15 @@ public class fileManager {
 			if (i.getName().equals(fileName)) {
 			    newCourse = false;
 			    sc = new Scanner(i);
+			    break;
 			}
 		}
 		if (newCourse == true) {
 		    files[counter] = new File(path);
 		    files[counter].getParentFile().mkdir();
 		    files[counter].createNewFile();
+		    // might be an error
+		    sc = new Scanner(path);
 		}
 	}
 	
