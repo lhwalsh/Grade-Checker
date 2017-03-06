@@ -1,56 +1,48 @@
 // class that will handle the files for different classes
 // will create a new file and manage existing files
 
-import java.io.*;
-import java.util.Scanner;
 import java.io.File;
+import java.io.FileWriter;;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.util.Scanner;
 
 public class fileManager {
 	
-	File[] files = new File[10];
-	private int counter;
-	private Scanner sc;
+    File file;
+    FileWriter fw;
+    BufferedWriter bw;
 
-	// purpose of this code is to create access a file, or create a new one
-	// if we don't already have a file with that name
-	
-	// there is an error in the code somewhere here, need to go through
-	// and understand it then find the bug
-	public fileManager(String fileName) throws Exception {
-		File folder = new File("~/randomProjects/gradeChecker/courses");
-		listFilesForFolder(folder);
-		String path = "~/randomProjects/gradeChecker/courses/" + fileName;
-		boolean newCourse = true;
-		for (File i : files) {
-			if (i.getName().equals(fileName)) {
-			    newCourse = false;
-			    sc = new Scanner(i);
-			    break;
-			}
-		}
-		if (newCourse == true) {
-		    files[counter] = new File(path);
-		    files[counter].getParentFile().mkdir();
-		    files[counter].createNewFile();
-		    // might be an error
-		    sc = new Scanner(path);
-		}
+    public static void main(String args[]) throws Exception {
+	fileManager test = new fileManager("CS331");
+    }
+    
+    public fileManager(String fileName) throws Exception {
+	try {
+	    file = new File("courses/" + fileName + ".txt");
+	    if (!file.exists()) {
+	        file.createNewFile();
+	    }
+	    fw = new FileWriter(file.getAbsoluteFile(), true);
+	    bw = new BufferedWriter(fw);
+	} catch (IOException e) {
+	    e.printStackTrace();
 	}
-	
-	public Scanner getScanner() {
-	    return sc;
-	}
+    }
+    
+    public void write(String content) {
+	bw.write(content);
+    }
 
-	public void listFilesForFolder(final File folder) {
-		counter  = 0;
-		for (final File fileEntry : folder.listFiles()) {
-			if (fileEntry.isDirectory()) {
-				listFilesForFolder(fileEntry);
-			} else {
-				files[counter] = fileEntry;
-				counter++;
-			}
-		}
-	}
+    public String readNext() {
+	return sc.next();
+    }
 
+    public int readNextInt() {
+	return sc.nextInt();
+    }
+
+    public double readNextDouble() {
+	return sc.nextDouble();
+    }
 }
